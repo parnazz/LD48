@@ -102,8 +102,8 @@ MonoBehaviour:
   _currentStats:
     _currentHealth: 100
     _defense: 3
-    _damage: 5
-  _rb: {fileID: 0}
+    _damage: 10
+    _attackSpeed: 0.5
 --- !u!50 &2946449371318820807
 Rigidbody2D:
   serializedVersion: 4

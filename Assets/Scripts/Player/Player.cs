@@ -35,6 +35,11 @@ public class Player : Character
     {
         base.TakeDamage(signal);
         OnHealthChanged();
+
+        if (_currentStats._currentHealth <= 0)
+        {
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.GameOverState });
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,20 +47,11 @@ public class Player : Character
         if (collision.CompareTag("Enemy"))
         {
             _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.FightState } );
-
+           
             var enemy = collision.GetComponent<Enemy>();
-            
-            StartCoroutine(DoDamageCoroutine(enemy));
-        }
-    }
+            _signalBus.Fire(new FightBeginSignal { sender = this, reciever = enemy });
 
-    private IEnumerator DoDamageCoroutine(Enemy enemy)
-    {
-        while (enemy.CurrentStats._currentHealth > 0)
-        {
-            DamageSignal signal = new DamageSignal { reciever = enemy, sender = this };
-            DoDamage(signal);
-            yield return new WaitForSeconds(_currentStats._attackSpeed);
+            StartCoroutine(DoDamageCoroutine(enemy));
         }
     }
 

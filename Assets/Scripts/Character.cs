@@ -12,7 +12,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected CharacterStats _currentStats;
 
-    public Rigidbody2D _rb;
+    protected Rigidbody2D _rb;
 
     protected SignalBus _signalBus;
 
@@ -37,6 +37,16 @@ public abstract class Character : MonoBehaviour
         if (signal.reciever == this)
         {
             _currentStats._currentHealth -= signal.sender.CurrentStats._damage;
+        }
+    }
+
+    protected IEnumerator DoDamageCoroutine(Character character)
+    {
+        while (character.CurrentStats._currentHealth > 0)
+        {
+            DamageSignal signal = new DamageSignal { reciever = character, sender = this };
+            DoDamage(signal);
+            yield return new WaitForSeconds(_currentStats._attackSpeed);
         }
     }
 

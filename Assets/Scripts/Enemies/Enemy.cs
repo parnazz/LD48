@@ -18,20 +18,23 @@ public class Enemy : Character
 
     private void Awake()
     {
-        _signalBus.Subscribe<PlayerSpawnedSignal>(SetPlayer);
         _signalBus.Subscribe<DamageSignal>(TakeDamage);
+        _signalBus.Subscribe<FightBeginSignal>(OnFightBegin);
     }
 
     void Start()
     {
         _storage.enemies.Add(this);
-
-        DamageSignal signal = new DamageSignal { reciever = _player, sender = this };
     }
 
-    private void SetPlayer(PlayerSpawnedSignal signal)
+    private void OnFightBegin(FightBeginSignal signal)
     {
-        _player = signal.player;
+        if (signal.reciever != this) return;
+
+        _player = signal.sender;
+        if (_player == null) return;
+
+        StartCoroutine(DoDamageCoroutine(_player));
     }
 
     override public void TakeDamage(DamageSignal signal)
@@ -40,7 +43,6 @@ public class Enemy : Character
 
         if (_currentStats._currentHealth <= 0)
         {
-            Debug.Log("Dead" + this.GetInstanceID());
             _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
             gameObject.SetActive(false);
             Destroy(this.gameObject, 3);
@@ -49,8 +51,10 @@ public class Enemy : Character
 
     private void OnDisable()
     {
-        _signalBus.Unsubscribe<PlayerSpawnedSignal>(SetPlayer);
         _signalBus.Unsubscribe<DamageSignal>(TakeDamage);
+        _signalBus.Unsubscribe<FightBeginSignal>(OnFightBegin);
+
+        _storage.enemies.Remove(this);
     }
 
     public class Factory : PlaceholderFactory<Enemy>

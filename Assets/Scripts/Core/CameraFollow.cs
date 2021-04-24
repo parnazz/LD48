@@ -30,4 +30,9 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = new Vector3(_player.position.x, _player.position.y, transform.position.z);
     }
+
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<PlayerSpawnedSignal>(SetPlayerTransform);
+    }
 }

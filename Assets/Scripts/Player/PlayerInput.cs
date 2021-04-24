@@ -34,6 +34,8 @@ public class PlayerInput : IFixedTickable, IInitializable, IDisposable
             case GameState.FightState:
                 Fight();
                 break;
+            case GameState.GameOverState:
+                break;
             default:
                 break;
         }

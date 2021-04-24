@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
         _settings = settings;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _startButton.onClick.AddListener(NextScene);
