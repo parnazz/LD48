@@ -144,5 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7569d81aa2da1994c989242ca4636513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterBaseStats: {fileID: 11400000, guid: ed4dd5f8c0713b44c9ca8bb5db4ee37e, type: 2}
+  _currentStats:
+    _currentHealth: 200
+    _defense: 5
+    _damage: 10
   _playerSpeed: 5
-  _playerStats: {fileID: 11400000, guid: ed4dd5f8c0713b44c9ca8bb5db4ee37e, type: 2}

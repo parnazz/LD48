@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
 
     private void SetPlayerTransform(PlayerSpawnedSignal signal)
     {
-        _player = signal.playerTransform;
+        _player = signal.player.transform;
     }
 
     void LateUpdate()

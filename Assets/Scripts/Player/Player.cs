@@ -3,41 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     [SerializeField]
     private float _playerSpeed = 5f;
 
-    [SerializeField]
-    private CombatStats _playerStats;
-
     private Rigidbody2D _rb;
-
-    private SignalBus _signalBus;
-
-    public CombatStats PlayerStats => _playerStats;
-
-    [Inject]
-    private void Construct(SignalBus signalBus)
-    {
-        _signalBus = signalBus;
-    }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        _signalBus.Subscribe<MoveSignal>(Move);
+        _signalBus.Subscribe<DamageSignal>(TakeDamage);
     }
 
     void Start()
     {
-        _signalBus.Subscribe<MoveSignal>(Move);
+        OnHealthChanged();
+    }
 
-        _signalBus.Fire(new PlayerStatsChangedSignal { stats = _playerStats });
+    private void OnHealthChanged()
+    {
+        _signalBus.Fire(new PlayerStatsChangedSignal { stats = CurrentStats });
     }
 
     private void Move(MoveSignal signal)
     {
         _rb.position = (Vector2)transform.position + signal.moveInput * Time.fixedDeltaTime * _playerSpeed;
+    }
+
+    override public void TakeDamage(DamageSignal signal)
+    {
+        base.TakeDamage(signal);
+        OnHealthChanged();
     }
 
     public class Factory : PlaceholderFactory<Player>

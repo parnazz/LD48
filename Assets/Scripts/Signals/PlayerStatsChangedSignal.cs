@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerStatsChangedSignal
 {
-    public CombatStats stats;
+    public Character.CharacterStats stats;
 }

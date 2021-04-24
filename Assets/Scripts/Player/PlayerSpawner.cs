@@ -22,7 +22,7 @@ public class PlayerSpawner : IInitializable
     {
         Player player = _playerFactory.Create(_spawnSettings.startPosition.position);
         _signalBus.Fire(new PlayerSpawnedSignal 
-        { playerTransform = player.transform,
-            playerStats = player.PlayerStats});
+        { player = player,
+            playerStats = player.BaseStats});
     }
 }

@@ -95,3 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4af5099f35ac9469b07db534ac39a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterBaseStats: {fileID: 11400000, guid: 86bc5f9ffbd6a0149be6221173e44c46, type: 2}
+  _currentStats:
+    _currentHealth: 100
+    _defense: 3
+    _damage: 5
