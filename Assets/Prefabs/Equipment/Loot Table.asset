@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128b37aeaca7d2642838c8d5160e17bd, type: 3}
+  m_Name: Loot Table
+  m_EditorClassIdentifier: 
+  lootTable:
+  - equipment:
+    - {fileID: 11400000, guid: 5d4cc35298909574b8313f4b28a19f74, type: 2}
+    - {fileID: 11400000, guid: c26df9ca99b9c7b4cbec514635a8119b, type: 2}
+    - {fileID: 11400000, guid: 74ddaebdc9b9f2b4dac94f43d1772fff, type: 2}
+  - equipment:
+    - {fileID: 11400000, guid: aa4e71a1a9895b14ab713b14b34ef1aa, type: 2}
+    - {fileID: 11400000, guid: c013f63ee417f744985c28156b3d329d, type: 2}
+    - {fileID: 11400000, guid: 693319549da1a514391d3e59a307c970, type: 2}
+  - equipment:
+    - {fileID: 11400000, guid: bcb5675c89fff444589f4d826743ac50, type: 2}
+    - {fileID: 11400000, guid: f97f64e77a493e84aab2383c792b4ef1, type: 2}
+    - {fileID: 11400000, guid: 03d9c607cfa761c40aa424914f72228f, type: 2}
+  - equipment:
+    - {fileID: 11400000, guid: 147af68203f1dd3488b596e69a097a7f, type: 2}
+    - {fileID: 11400000, guid: 4e0ebc6cc042bd54489c6cbb98adef02, type: 2}
+    - {fileID: 11400000, guid: be5202dd3cdce4241832b96a798e0106, type: 2}

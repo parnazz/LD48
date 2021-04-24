@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06907c898d740d94ea862bf4e8f565e4, type: 3}
-  m_Name: Sword
+  m_Name: SwordLv2
   m_EditorClassIdentifier: 
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: -993536727369214721, guid: 7b4e62fcbddf67c4f92ca910f8d4310a, type: 3}
   damage: 10
   health: 0
   defense: 0

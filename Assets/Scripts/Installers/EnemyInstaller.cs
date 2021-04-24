@@ -9,21 +9,19 @@ public class EnemyInstaller : MonoInstaller
     private Enemy _enemyPrefab;
 
     [SerializeField]
-    private EnemySpawnSettings _enemySpawnSettings;
+    private List<EnemySpawnSettings> _enemySpawnSettings;
 
     [Serializable]
     public class EnemySpawnSettings
     {
-        public List<Transform> startPositions;
-        public List<GameObject> enemyPrefabs;
+        public Transform startPosition;
+        public GameObject enemyPrefab;
     }
 
     public override void InstallBindings()
     {
         Container.BindInstance(_enemySpawnSettings);
 
-        //Container.BindFactory<Enemy, IEnemyFactory>().
-        //Container.BindFactory<Enemy, Enemy.Factory>().FromComponentInNewPrefab(_enemyPrefab);
         Container.Bind<IEnemyFactory>().To<CustomEnemyFactory>().AsSingle();
         Container.BindInterfacesTo<EnemySpawner>().AsSingle();
         Container.Bind<EnemyStorage>().AsSingle();
