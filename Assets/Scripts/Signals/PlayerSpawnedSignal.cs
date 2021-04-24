@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerSpawnedSignal
 {
     public Transform playerTransform;
+    public CombatStats playerStats;
 }

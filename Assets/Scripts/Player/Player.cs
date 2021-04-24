@@ -8,9 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _playerSpeed = 5f;
 
+    [SerializeField]
+    private CombatStats _playerStats;
+
     private Rigidbody2D _rb;
 
     private SignalBus _signalBus;
+
+    public CombatStats PlayerStats => _playerStats;
 
     [Inject]
     private void Construct(SignalBus signalBus)
@@ -23,10 +28,11 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _signalBus.Subscribe<MoveSignal>(Move);
+
+        _signalBus.Fire(new PlayerStatsChangedSignal { stats = _playerStats });
     }
 
     private void Move(MoveSignal signal)

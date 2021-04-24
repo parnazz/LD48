@@ -21,6 +21,8 @@ public class PlayerSpawner : IInitializable
     public void Initialize()
     {
         Player player = _playerFactory.Create(_spawnSettings.startPosition.position);
-        _signalBus.Fire(new PlayerSpawnedSignal { playerTransform = player.transform });
+        _signalBus.Fire(new PlayerSpawnedSignal 
+        { playerTransform = player.transform,
+            playerStats = player.PlayerStats});
     }
 }
