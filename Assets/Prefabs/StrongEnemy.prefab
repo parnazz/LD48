@@ -102,10 +102,11 @@ MonoBehaviour:
   _currentStats:
     _currentHealth: 100
     _defense: 3
-    _damage: 10
+    _damage: 4
     _attackSpeed: 0.5
   _enemyLevel: 1
   _lootTable: {fileID: 11400000, guid: 3e1cd4ed181ed3e4385bea4ac3431606, type: 2}
+  _lootDrop: {fileID: 0}
 --- !u!50 &2946449371318820807
 Rigidbody2D:
   serializedVersion: 4
