@@ -8,8 +8,6 @@ public class Player : Character
     [SerializeField]
     private float _playerSpeed = 5f;
 
-    private Rigidbody2D _rb;
-
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -37,6 +35,34 @@ public class Player : Character
     {
         base.TakeDamage(signal);
         OnHealthChanged();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.FightState } );
+
+            var enemy = collision.GetComponent<Enemy>();
+            
+            StartCoroutine(DoDamageCoroutine(enemy));
+        }
+    }
+
+    private IEnumerator DoDamageCoroutine(Enemy enemy)
+    {
+        while (enemy.CurrentStats._currentHealth > 0)
+        {
+            DamageSignal signal = new DamageSignal { reciever = enemy, sender = this };
+            DoDamage(signal);
+            yield return new WaitForSeconds(_currentStats._attackSpeed);
+        }
+    }
+
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<MoveSignal>(Move);
+        _signalBus.Unsubscribe<DamageSignal>(TakeDamage);
     }
 
     public class Factory : PlaceholderFactory<Player>

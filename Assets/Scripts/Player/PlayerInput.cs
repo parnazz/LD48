@@ -1,22 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerInput : IFixedTickable
+public class PlayerInput : IFixedTickable, IInitializable, IDisposable
 {
     private SignalBus _signalBus;
+    private GameState _gameState;
 
     public PlayerInput(SignalBus signalBus)
     {
         _signalBus = signalBus;
     }
 
+    public void Initialize()
+    {
+        _signalBus.Subscribe<GameStateChangedSignal>(OnGameStateChanged);
+    }
+
+    private void OnGameStateChanged(GameStateChangedSignal signal)
+    {
+        _gameState = signal.gameState;
+    }
+
     public void FixedTick()
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        switch(_gameState)
+        {
+            case GameState.ExploreState:
+                Walk();
+                break;
+            case GameState.FightState:
+                Fight();
+                break;
+            default:
+                break;
+        }
+    }
 
-        if (horizontalInput != 0)
-            _signalBus.Fire(new MoveSignal { moveInput = new Vector2(horizontalInput, 0) });
+    private void Walk()
+    {
+        _signalBus.Fire(new MoveSignal { moveInput = new Vector2(1, 0) });
+    }
+
+    private void Fight()
+    {
+
+    }
+
+    public void Dispose()
+    {
+        _signalBus.Unsubscribe<GameStateChangedSignal>(OnGameStateChanged);
     }
 }

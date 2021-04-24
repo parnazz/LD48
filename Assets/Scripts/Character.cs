@@ -11,7 +11,9 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField]
     protected CharacterStats _currentStats;
-    
+
+    public Rigidbody2D _rb;
+
     protected SignalBus _signalBus;
 
     public BaseStats BaseStats => _characterBaseStats;
@@ -30,7 +32,12 @@ public abstract class Character : MonoBehaviour
 
     public virtual void TakeDamage(DamageSignal signal)
     {
-        _currentStats._currentHealth -= signal.sender.CurrentStats._damage;
+        if (signal.sender == this) return;
+
+        if (signal.reciever == this)
+        {
+            _currentStats._currentHealth -= signal.sender.CurrentStats._damage;
+        }
     }
 
     [Serializable]
@@ -39,5 +46,6 @@ public abstract class Character : MonoBehaviour
         public float _currentHealth;
         public float _defense;
         public float _damage;
+        public float _attackSpeed;
     }
 }

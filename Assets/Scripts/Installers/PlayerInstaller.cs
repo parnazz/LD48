@@ -20,7 +20,6 @@ public class PlayerInstaller : MonoInstaller
     {
         Container.DeclareSignal<MoveSignal>();
         Container.DeclareSignal<PlayerSpawnedSignal>();
-        Container.DeclareSignal<DamageSignal>();
 
         Container.BindInterfacesTo<PlayerInput>().AsSingle();
 

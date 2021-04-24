@@ -19,15 +19,14 @@ public class Enemy : Character
     private void Awake()
     {
         _signalBus.Subscribe<PlayerSpawnedSignal>(SetPlayer);
+        _signalBus.Subscribe<DamageSignal>(TakeDamage);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _storage.enemies.Add(this);
 
         DamageSignal signal = new DamageSignal { reciever = _player, sender = this };
-        DoDamage(signal);
     }
 
     private void SetPlayer(PlayerSpawnedSignal signal)
@@ -35,10 +34,23 @@ public class Enemy : Character
         _player = signal.player;
     }
 
-    // Update is called once per frame
-    void Update()
+    override public void TakeDamage(DamageSignal signal)
     {
-        
+        base.TakeDamage(signal);
+
+        if (_currentStats._currentHealth <= 0)
+        {
+            Debug.Log("Dead" + this.GetInstanceID());
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
+            gameObject.SetActive(false);
+            Destroy(this.gameObject, 3);
+        }
+    }
+
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<PlayerSpawnedSignal>(SetPlayer);
+        _signalBus.Unsubscribe<DamageSignal>(TakeDamage);
     }
 
     public class Factory : PlaceholderFactory<Enemy>
