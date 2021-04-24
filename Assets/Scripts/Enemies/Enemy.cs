@@ -56,14 +56,4 @@ public class Enemy : Character
 
         _storage.enemies.Remove(this);
     }
-
-    public class Factory : PlaceholderFactory<Enemy>
-    {
-        public Enemy Create(Vector3 at)
-        {
-            var enemy = base.Create();
-            enemy.transform.position = at;
-            return enemy;
-        }
-    }
 }

@@ -5,10 +5,10 @@ using Zenject;
 
 public class EnemySpawner : IInitializable
 {
-    private Enemy.Factory _enemyFactory;
+    private IEnemyFactory _enemyFactory;
     private EnemyInstaller.EnemySpawnSettings _spawnSettings;
 
-    public EnemySpawner(Enemy.Factory enemyFactory,
+    public EnemySpawner(IEnemyFactory enemyFactory,
         EnemyInstaller.EnemySpawnSettings spawnSettings)
     {
         _enemyFactory = enemyFactory;
@@ -17,9 +17,9 @@ public class EnemySpawner : IInitializable
 
     public void Initialize()
     {
-        foreach (var marker in _spawnSettings.startPositions)
+        for (int i = 0; i < _spawnSettings.startPositions.Count; i++)
         {
-            _enemyFactory.Create(marker.position);
+            _enemyFactory.Create(_spawnSettings.enemyPrefabs[i], _spawnSettings.startPositions[i].position);
         }
     }
 }
