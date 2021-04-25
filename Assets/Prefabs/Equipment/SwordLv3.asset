@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: -3702229310380340002, guid: 7b4e62fcbddf67c4f92ca910f8d4310a, type: 3}
   itemTag: Weapon
-  damage: 10
+  damage: 37
   health: 0
   defense: 0
   attackSpeed: 0.4

@@ -6,9 +6,21 @@ using Zenject;
 public class Player : Character
 {
     [SerializeField]
+    private BaseStats _characterBaseStats;
+
+    [SerializeField]
     private float _playerSpeed = 5f;
 
+    [SerializeField]
+    private float _criticalHealth = 15f;
+
+    [SerializeField]
+    private float _timeToBlock = 0.1f;
+
     private float _maxHealth;
+    private bool _canBlock;
+
+    public BaseStats BaseStats => _characterBaseStats;
 
     private void Awake()
     {
@@ -17,12 +29,14 @@ public class Player : Character
         _signalBus.Subscribe<MoveSignal>(Move);
         _signalBus.Subscribe<DamageSignal>(TakeDamage);
         _signalBus.Subscribe<ItemEquipedSignal>(OnItemEquiped);
+        _signalBus.Subscribe<UseHealthPotionSignal>(OnHealing);
+        _signalBus.Subscribe<BlockSignal>(Block);
     }
 
     void Start()
     {
         SetInitialStats();
-        OnHealthChanged();
+        OnStatsChanged();
     }
 
     private void SetInitialStats()
@@ -34,7 +48,7 @@ public class Player : Character
         _currentStats.attackSpeed = _characterBaseStats.attackSpeed;
     }
 
-    private void OnHealthChanged()
+    private void OnStatsChanged()
     {
         _signalBus.Fire(new PlayerStatsChangedSignal { stats = CurrentStats });
     }
@@ -44,15 +58,62 @@ public class Player : Character
         _rb.position = (Vector2)transform.position + signal.moveInput * Time.fixedDeltaTime * _playerSpeed;
     }
 
+    private void Block(BlockSignal signal)
+    {
+        StartCoroutine(BlockCoroutine());
+    }
+
+    private IEnumerator BlockCoroutine()
+    {
+        _canBlock = true;
+        yield return new WaitForSeconds(_timeToBlock);
+        _canBlock = false;
+    }
+
     override public void TakeDamage(DamageSignal signal)
     {
-        base.TakeDamage(signal);
-        OnHealthChanged();
+        if (signal.sender == this) return;
 
+        if (signal.reciever == this)
+        {
+            var damageTaken = _canBlock ?
+                signal.sender.CurrentStats.damage - _currentStats.defense :
+                signal.sender.CurrentStats.damage;
+
+            damageTaken = Mathf.Max(0, damageTaken);
+
+            _currentStats.currentHealth -= damageTaken;
+        }
+
+        OnStatsChanged();
+        OnCriticalHealth();
+        OnDeath();
+    }
+
+    private void OnCriticalHealth()
+    {
+        if (_currentStats.currentHealth <= _criticalHealth)
+        {
+            _signalBus.Fire(new HealingSignal { });
+        }
+    }
+
+    private void OnDeath()
+    {
         if (_currentStats.currentHealth <= 0)
         {
             _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.GameOverState });
         }
+    }
+
+    private void OnHealing(UseHealthPotionSignal signal)
+    {
+        _currentStats.currentHealth += signal.item.amountOfHealing;
+        _currentStats.currentHealth = Mathf.Clamp(_currentStats.currentHealth,
+            _currentStats.currentHealth,
+            _maxHealth);
+
+        OnStatsChanged();
     }
 
     private void OnItemEquiped(ItemEquipedSignal signal)
@@ -70,10 +131,7 @@ public class Player : Character
             _currentStats.currentHealth = _maxHealth - healthDiff;
         }
 
-        OnHealthChanged();
-
-        Debug.Log("Max Health: " + _maxHealth);
-        Debug.Log("Current Health: " + _currentStats.currentHealth);
+        OnStatsChanged();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

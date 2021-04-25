@@ -7,16 +7,12 @@ using Zenject;
 public abstract class Character : MonoBehaviour
 {
     [SerializeField]
-    protected BaseStats _characterBaseStats;
-
-    [SerializeField]
     protected CharacterStats _currentStats;
 
     protected Rigidbody2D _rb;
 
     protected SignalBus _signalBus;
 
-    public BaseStats BaseStats => _characterBaseStats;
     public CharacterStats CurrentStats => _currentStats;
 
     [Inject]

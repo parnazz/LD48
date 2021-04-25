@@ -29,3 +29,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 147af68203f1dd3488b596e69a097a7f, type: 2}
     - {fileID: 11400000, guid: 4e0ebc6cc042bd54489c6cbb98adef02, type: 2}
     - {fileID: 11400000, guid: be5202dd3cdce4241832b96a798e0106, type: 2}
+  healthPotion: {fileID: 11400000, guid: 38316494cccd90e4f993dfeaf686f08a, type: 2}

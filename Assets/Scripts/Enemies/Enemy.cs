@@ -6,6 +6,9 @@ using Zenject;
 public class Enemy : Character
 {
     [SerializeField]
+    private float _timeToNotify = 0.1f;
+
+    [SerializeField]
     private int _enemyLevel;
 
     [SerializeField]
@@ -13,8 +16,6 @@ public class Enemy : Character
 
     private EnemyStorage _storage;
     private Player _player;
-    
-    [SerializeField]
     private Item _lootDrop;
 
     [Inject]
@@ -53,7 +54,20 @@ public class Enemy : Character
         StartCoroutine(DoDamageCoroutine(_player));
     }
 
-    override public void TakeDamage(DamageSignal signal)
+    public override void DoDamage(DamageSignal signal)
+    {
+        StartCoroutine(BeforeAttackCoroutine(signal));
+    }
+
+    private IEnumerator BeforeAttackCoroutine(DamageSignal signal)
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(_timeToNotify);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        base.DoDamage(signal);
+    }
+
+    public override void TakeDamage(DamageSignal signal)
     {
         base.TakeDamage(signal);
         OnEnemyDeath();
@@ -76,5 +90,10 @@ public class Enemy : Character
         _signalBus.Unsubscribe<FightBeginSignal>(OnFightBegin);
 
         _storage.enemies.Remove(this);
+
+        if (_storage.enemies.Count <= 0)
+        {
+            _signalBus.Fire(new LootDropSignal { item = _lootTable.healthPotion });
+        }
     }
 }

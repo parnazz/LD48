@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerInput : IFixedTickable, IInitializable, IDisposable
+public class PlayerInput : ITickable, IInitializable, IDisposable
 {
     private SignalBus _signalBus;
     private GameState _gameState;
+
+    private float _timeWhenBlocked = 0;
+    private float _blockCooldown = 0.5f;
 
     public PlayerInput(SignalBus signalBus)
     {
@@ -24,7 +27,7 @@ public class PlayerInput : IFixedTickable, IInitializable, IDisposable
         _gameState = signal.gameState;
     }
 
-    public void FixedTick()
+    public void Tick()
     {
         switch(_gameState)
         {
@@ -44,13 +47,17 @@ public class PlayerInput : IFixedTickable, IInitializable, IDisposable
     private void OnExploreState()
     {
         _signalBus.Fire(new MoveSignal { moveInput = new Vector2(1, 0) });
-
-
     }
 
     private void Fight()
     {
+        if (Input.GetMouseButtonDown(1) && Time.time >= _timeWhenBlocked)
+        {
+            Debug.Log("Blocking");
 
+            _timeWhenBlocked = Time.time + _blockCooldown;
+            _signalBus.Fire(new BlockSignal { });
+        }
     }
 
     public void Dispose()

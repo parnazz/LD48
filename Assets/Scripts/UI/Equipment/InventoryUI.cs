@@ -25,6 +25,7 @@ public class InventoryUI : MonoBehaviour
     {
         _signalBus.Subscribe<LootDropSignal>(OnLootDropped);
         _signalBus.Subscribe<UseItemSignal>(OnUseItem);
+        _signalBus.Subscribe<HealingSignal>(OnUseHealthPotion);
     }
 
     void Start()
@@ -49,10 +50,10 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (var slot in _inventorySlots)
         {
-            if (slot._slotImage.sprite == null)
+            if (slot.slotImage.sprite == null)
             {
-                slot._item = signal.item;
-                slot._slotImage.sprite = signal.item.icon;
+                slot.item = signal.item;
+                slot.slotImage.sprite = signal.item.icon;
                 return;
             }
         }
@@ -73,5 +74,26 @@ public class InventoryUI : MonoBehaviour
                 }
             }
         }
+
+        _signalBus.Fire(new UseHealthPotionSignal { item = (HealthPotion)signal.item });
+    }
+
+    private void OnUseHealthPotion(HealingSignal signal)
+    {
+        foreach (var slot in _inventorySlots)
+        {
+            if (slot.item != null && slot.item.itemTag == "Consumable")
+            {
+                UsePotion(slot);
+                return;
+            }
+        }
+    }
+
+    private void UsePotion(InventorySlot slot)
+    {
+        _signalBus.Fire(new UseHealthPotionSignal { item = (HealthPotion)slot.item });
+        slot.item = null;
+        slot.slotImage.sprite = null;
     }
 }

@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06907c898d740d94ea862bf4e8f565e4, type: 3}
-  m_Name: SwordLv2
+  m_Script: {fileID: 11500000, guid: 50c279f4c3e502e4ca5b02505da8e8f4, type: 3}
+  m_Name: Health Potion
   m_EditorClassIdentifier: 
-  icon: {fileID: -993536727369214721, guid: 7b4e62fcbddf67c4f92ca910f8d4310a, type: 3}
-  itemTag: Weapon
-  damage: 27
-  health: 0
-  defense: 0
-  attackSpeed: 0.4
+  icon: {fileID: 6335270562383830132, guid: 24d0c5b6b13f06e47a97a1b8e419a3af, type: 3}
+  itemTag: Consumable
+  amountOfHealing: 100

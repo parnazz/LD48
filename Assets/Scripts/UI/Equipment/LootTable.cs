@@ -7,6 +7,7 @@ using UnityEngine;
 public class LootTable : ScriptableObject
 {
     public List<EquipmentList> lootTable;
+    public Item healthPotion;
 }
 
 [Serializable]

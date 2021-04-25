@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: -2110027701011275211, guid: 24d0c5b6b13f06e47a97a1b8e419a3af, type: 3}
   itemTag: Shield
-  damage: 10
+  damage: 0
   health: 0
-  defense: 0
-  attackSpeed: 0.4
+  defense: 15
+  attackSpeed: 0

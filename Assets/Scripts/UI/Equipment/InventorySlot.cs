@@ -7,9 +7,9 @@ using Zenject;
 
 public class InventorySlot : MonoBehaviour, IPointerDownHandler
 {
-    public Item _item;
+    public Item item;
 
-    public Image _slotImage;
+    public Image slotImage;
 
     private GameController _gameController;
     private SignalBus _signalBus;
@@ -22,20 +22,19 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler
         _signalBus = signalBus;
     }
 
-    void Start()
+    private void Awake()
     {
-        _slotImage = GetComponent<Image>();
+        slotImage = GetComponent<Image>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_gameController.GameState != GameState.ExploreState) return;
 
-        if (_item == null) return;
+        if (item == null) return;
             
-        Debug.Log(_item.name);
-        _signalBus.Fire(new UseItemSignal { item = _item });
-        _item = null;
-        _slotImage.sprite = null;
+        _signalBus.Fire(new UseItemSignal { item = item });
+        item = null;
+        slotImage.sprite = null;
     }
 }
