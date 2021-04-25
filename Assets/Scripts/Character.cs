@@ -36,7 +36,6 @@ public abstract class Character : MonoBehaviour
         {
             _currentStats.currentHealth -= signal.sender.CurrentStats.damage;
             _attackDelay = 0;
-            Debug.Log(signal.reciever + " hitted!");
         }
     }
 

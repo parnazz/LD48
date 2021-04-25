@@ -65,6 +65,8 @@ public class PlayerInput : ITickable, IInitializable, IDisposable
                 break;
             case GameState.GameOverState:
                 break;
+            case GameState.DialogState:
+                break;
             default:
                 break;
         }

@@ -17,16 +17,22 @@ public class Player : Character
     [SerializeField]
     private float _timeToBlock = 1.5f;
 
+    [SerializeField]
+    private List<Sprite> _sprites;
+
     private Enemy _enemyToAttack;
     private float _maxHealth;
     private float _timeWhenBlocked;
     private bool _canBlock;
+
+    private SpriteRenderer _spriteRenderer;
 
     public BaseStats BaseStats => _characterBaseStats;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _signalBus.Subscribe<MoveSignal>(Move);
         _signalBus.Subscribe<DamageSignal>(TakeDamage);
@@ -34,6 +40,7 @@ public class Player : Character
         _signalBus.Subscribe<UseHealthPotionSignal>(OnHealing);
         _signalBus.Subscribe<BlockSignal>(Block);
         _signalBus.Subscribe<PlayerAttackSignal>(Attack);
+        _signalBus.Subscribe<ChangePlayerLookSignal>(ChangeLook);
     }
 
     void Start()
@@ -51,6 +58,11 @@ public class Player : Character
         _currentStats.attackSpeed = _characterBaseStats.attackSpeed;
     }
 
+    private void ChangeLook(ChangePlayerLookSignal signal)
+    {
+        _spriteRenderer.sprite = _sprites[signal.index - 1];
+    }
+
     private void OnStatsChanged()
     {
         _signalBus.Fire(new PlayerStatsChangedSignal { stats = CurrentStats });
@@ -65,7 +77,6 @@ public class Player : Character
     {
         _canBlock = true;
         _timeWhenBlocked = Time.time;
-        //StartCoroutine(BlockCoroutine());
     }
 
     private IEnumerator BlockCoroutine()
@@ -167,6 +178,11 @@ public class Player : Character
 
             _enemyToAttack = collision.GetComponent<Enemy>();
             _signalBus.Fire(new FightBeginSignal { sender = this, reciever = _enemyToAttack });
+        }
+
+        if (collision.CompareTag("NPC"))
+        {
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.DialogState });
         }
     }
 

@@ -9,6 +9,9 @@ public class Enemy : Character
     private float _timeToNotify = 0.1f;
 
     [SerializeField]
+    private bool _canDropHealing;
+
+    [SerializeField]
     private GameObject _spriteNotifier;
 
     [SerializeField]
@@ -99,7 +102,7 @@ public class Enemy : Character
 
         _storage.enemies.Remove(this);
 
-        if (_storage.enemies.Count <= 0)
+        if (_canDropHealing)
         {
             _signalBus.Fire(new LootDropSignal { item = _lootTable.healthPotion });
         }
