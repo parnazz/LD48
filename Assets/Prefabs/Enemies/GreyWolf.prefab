@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4740420770086513998}
   - component: {fileID: 5729011732671638626}
   - component: {fileID: 2946449371318820807}
-  - component: {fileID: 7978613975898673158}
   - component: {fileID: 7396047250715058653}
+  - component: {fileID: 3359122812094669436}
   m_Layer: 0
   m_Name: GreyWolf
   m_TagString: Enemy
@@ -130,22 +130,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!58 &7978613975898673158
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4678577507432463143}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!58 &7396047250715058653
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -159,9 +143,35 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -2.59, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2.76
+--- !u!61 &3359122812094669436
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4678577507432463143}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.15752792, y: 0.052509785}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 15.89, y: 7.16}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.8035583, y: 5.5147057}
+  m_EdgeRadius: 0
 --- !u!1 &6250869825395757426
 GameObject:
   m_ObjectHideFlags: 0
