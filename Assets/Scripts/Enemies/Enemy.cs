@@ -9,6 +9,9 @@ public class Enemy : Character
     private float _timeToNotify = 0.1f;
 
     [SerializeField]
+    private GameObject _spriteNotifier;
+
+    [SerializeField]
     private int _enemyLevel;
 
     [SerializeField]
@@ -61,15 +64,16 @@ public class Enemy : Character
 
     private IEnumerator BeforeAttackCoroutine(DamageSignal signal)
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        _spriteNotifier.SetActive(true);
         yield return new WaitForSeconds(_timeToNotify);
-        GetComponent<SpriteRenderer>().color = Color.white;
+        _spriteNotifier.SetActive(false);
         base.DoDamage(signal);
     }
 
     public override void TakeDamage(DamageSignal signal)
     {
         base.TakeDamage(signal);
+        _signalBus.Fire(new UpdateEnemyHealthSignal { enemy = this });
         OnEnemyDeath();
     }
 

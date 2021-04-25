@@ -96,4 +96,11 @@ public class InventoryUI : MonoBehaviour
         slot.item = null;
         slot.slotImage.sprite = null;
     }
+
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<LootDropSignal>(OnLootDropped);
+        _signalBus.Unsubscribe<UseItemSignal>(OnUseItem);
+        _signalBus.Unsubscribe<HealingSignal>(OnUseHealthPotion);
+    }
 }

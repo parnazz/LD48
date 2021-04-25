@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GameController : IInitializable
+public class GameController : IInitializable, IDisposable
 {
     private GameState _gameState;
 
@@ -36,5 +37,10 @@ public class GameController : IInitializable
 
         if (_gameState == GameState.GameOverState)
             Time.timeScale = 0;
+    }
+
+    public void Dispose()
+    {
+        _signalBus.Unsubscribe<GameStateChangedSignal>(OnGameStateChange);
     }
 }

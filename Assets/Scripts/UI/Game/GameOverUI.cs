@@ -37,4 +37,9 @@ public class GameOverUI : MonoBehaviour
             _gameOverGO.SetActive(true);
         }
     }
+
+    private void OnDisable()
+    {
+        _signalBus.Unsubscribe<GameStateChangedSignal>(OnGameStateChange);
+    }
 }

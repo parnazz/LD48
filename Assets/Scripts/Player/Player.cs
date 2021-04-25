@@ -151,6 +151,9 @@ public class Player : Character
     {
         _signalBus.Unsubscribe<MoveSignal>(Move);
         _signalBus.Unsubscribe<DamageSignal>(TakeDamage);
+        _signalBus.Unsubscribe<ItemEquipedSignal>(OnItemEquiped);
+        _signalBus.Unsubscribe<UseHealthPotionSignal>(OnHealing);
+        _signalBus.Unsubscribe<BlockSignal>(Block);
     }
 
     public class Factory : PlaceholderFactory<Player>
