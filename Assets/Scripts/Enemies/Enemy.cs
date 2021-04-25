@@ -61,7 +61,7 @@ public class Enemy : Character
 
     private void OnEnemyDeath()
     {
-        if (_currentStats._currentHealth <= 0)
+        if (_currentStats.currentHealth <= 0)
         {
             _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
             _signalBus.Fire(new LootDropSignal { item = _lootDrop });

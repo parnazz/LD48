@@ -36,26 +36,26 @@ public abstract class Character : MonoBehaviour
 
         if (signal.reciever == this)
         {
-            _currentStats._currentHealth -= signal.sender.CurrentStats._damage;
+            _currentStats.currentHealth -= signal.sender.CurrentStats.damage;
         }
     }
 
     protected IEnumerator DoDamageCoroutine(Character character)
     {
-        while (character.CurrentStats._currentHealth > 0)
+        while (character.CurrentStats.currentHealth > 0)
         {
             DamageSignal signal = new DamageSignal { reciever = character, sender = this };
             DoDamage(signal);
-            yield return new WaitForSeconds(_currentStats._attackSpeed);
+            yield return new WaitForSeconds(_currentStats.attackSpeed);
         }
     }
 
     [Serializable]
     public class CharacterStats
     {
-        public float _currentHealth;
-        public float _defense;
-        public float _damage;
-        public float _attackSpeed;
+        public float currentHealth;
+        public float defense;
+        public float damage;
+        public float attackSpeed;
     }
 }

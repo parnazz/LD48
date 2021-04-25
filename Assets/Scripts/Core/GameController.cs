@@ -9,6 +9,8 @@ public class GameController : IInitializable
 
     private SignalBus _signalBus;
 
+    public GameState GameState => _gameState;
+
     public GameController(SignalBus signalBus)
     {
         _signalBus = signalBus;

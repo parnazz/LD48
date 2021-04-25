@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ShieldLv4
   m_EditorClassIdentifier: 
   icon: {fileID: -2274624579523492060, guid: 24d0c5b6b13f06e47a97a1b8e419a3af, type: 3}
+  itemTag: Shield
   damage: 10
   health: 0
   defense: 0

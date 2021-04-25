@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CombatStats", menuName = "Stats")]
 public class BaseStats : ScriptableObject
 {
-    public float _maxHealthPoints;
-    public float _defense;
-    public float _damage;
+    public float maxHealthPoints;
+    public float defense;
+    public float damage;
+    public float attackSpeed;
 }

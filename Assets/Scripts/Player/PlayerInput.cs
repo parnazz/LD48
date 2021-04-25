@@ -29,7 +29,7 @@ public class PlayerInput : IFixedTickable, IInitializable, IDisposable
         switch(_gameState)
         {
             case GameState.ExploreState:
-                Walk();
+                OnExploreState();
                 break;
             case GameState.FightState:
                 Fight();
@@ -41,9 +41,11 @@ public class PlayerInput : IFixedTickable, IInitializable, IDisposable
         }
     }
 
-    private void Walk()
+    private void OnExploreState()
     {
         _signalBus.Fire(new MoveSignal { moveInput = new Vector2(1, 0) });
+
+
     }
 
     private void Fight()

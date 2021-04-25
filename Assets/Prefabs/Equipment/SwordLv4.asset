@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SwordLv4
   m_EditorClassIdentifier: 
   icon: {fileID: 5552317993265244237, guid: 7b4e62fcbddf67c4f92ca910f8d4310a, type: 3}
+  itemTag: Weapon
   damage: 10
   health: 0
   defense: 0

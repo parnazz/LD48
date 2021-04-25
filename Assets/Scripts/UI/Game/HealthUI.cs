@@ -24,7 +24,7 @@ public class HealthUI : MonoBehaviour
 
     private void SetHPText(PlayerStatsChangedSignal signal)
     {
-        _currentHP.text = signal.stats._currentHealth.ToString();
+        _currentHP.text = signal.stats.currentHealth.ToString();
     }
 
     private void OnDisable()

@@ -8,7 +8,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private Transform _inventorySlotsTransform;
 
+    [SerializeField]
+    private Transform _equipmentSlotsTransform;
+
     private List<InventorySlot> _inventorySlots;
+    private List<EquipmentSlot> _equipmentSlots;
     private SignalBus _signalBus;
 
     [Inject]
@@ -20,9 +24,22 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         _signalBus.Subscribe<LootDropSignal>(OnLootDropped);
+        _signalBus.Subscribe<UseItemSignal>(OnUseItem);
     }
 
     void Start()
+    {
+        AddInventorySlots();
+        AddEquipmentSlots();
+    }
+
+    private void AddEquipmentSlots()
+    {
+        var slots = _equipmentSlotsTransform.GetComponentsInChildren<EquipmentSlot>();
+        _equipmentSlots = new List<EquipmentSlot>(slots);
+    }
+
+    private void AddInventorySlots()
     {
         var slots = _inventorySlotsTransform.GetComponentsInChildren<InventorySlot>();
         _inventorySlots = new List<InventorySlot>(slots);
@@ -37,6 +54,23 @@ public class InventoryUI : MonoBehaviour
                 slot._item = signal.item;
                 slot._slotImage.sprite = signal.item.icon;
                 return;
+            }
+        }
+    }
+
+    private void OnUseItem(UseItemSignal signal)
+    {
+        if (signal.item.itemTag != "Consumable")
+        {
+            foreach (var slot in _equipmentSlots)
+            {
+                if (slot.slotTag == signal.item.itemTag)
+                {
+                    slot.item = (Equipment)signal.item;
+                    slot.slotImage.sprite = signal.item.icon;
+                    _signalBus.Fire(new ItemEquipedSignal { item = slot.item });
+                    return;
+                }
             }
         }
     }

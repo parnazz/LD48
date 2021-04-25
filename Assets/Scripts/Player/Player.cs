@@ -8,17 +8,30 @@ public class Player : Character
     [SerializeField]
     private float _playerSpeed = 5f;
 
+    private float _maxHealth;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
 
         _signalBus.Subscribe<MoveSignal>(Move);
         _signalBus.Subscribe<DamageSignal>(TakeDamage);
+        _signalBus.Subscribe<ItemEquipedSignal>(OnItemEquiped);
     }
 
     void Start()
     {
+        SetInitialStats();
         OnHealthChanged();
+    }
+
+    private void SetInitialStats()
+    {
+        _maxHealth = _characterBaseStats.maxHealthPoints;
+        _currentStats.currentHealth = _characterBaseStats.maxHealthPoints;
+        _currentStats.damage = _characterBaseStats.damage;
+        _currentStats.defense = _characterBaseStats.defense;
+        _currentStats.attackSpeed = _characterBaseStats.attackSpeed;
     }
 
     private void OnHealthChanged()
@@ -36,10 +49,31 @@ public class Player : Character
         base.TakeDamage(signal);
         OnHealthChanged();
 
-        if (_currentStats._currentHealth <= 0)
+        if (_currentStats.currentHealth <= 0)
         {
             _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.GameOverState });
         }
+    }
+
+    private void OnItemEquiped(ItemEquipedSignal signal)
+    {
+        if (signal.item.damage != 0)
+            _currentStats.damage = signal.item.damage;
+
+        if (signal.item.defense != 0)
+            _currentStats.defense = signal.item.defense;
+
+        if (signal.item.health != 0)
+        {
+            var healthDiff = _maxHealth - _currentStats.currentHealth;
+            _maxHealth = signal.item.health;
+            _currentStats.currentHealth = _maxHealth - healthDiff;
+        }
+
+        OnHealthChanged();
+
+        Debug.Log("Max Health: " + _maxHealth);
+        Debug.Log("Current Health: " + _currentStats.currentHealth);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

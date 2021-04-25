@@ -19,9 +19,11 @@ public class MainGameInstaller : MonoInstaller
         Container.DeclareSignal<GameStateChangedSignal>();
         Container.DeclareSignal<FightBeginSignal>();
         Container.DeclareSignal<LootDropSignal>();
+        Container.DeclareSignal<UseItemSignal>();
+        Container.DeclareSignal<ItemEquipedSignal>();
 
         Container.BindInstance(_settings);
-        Container.BindInterfacesTo<GameController>().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameController>().AsSingle();
         Container.Bind<SceneController>().AsSingle();
     }
 }
