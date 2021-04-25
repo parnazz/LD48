@@ -13,6 +13,8 @@ public abstract class Character : MonoBehaviour
 
     protected SignalBus _signalBus;
 
+    protected float _attackDelay = 2f;
+
     public CharacterStats CurrentStats => _currentStats;
 
     [Inject]
@@ -33,6 +35,8 @@ public abstract class Character : MonoBehaviour
         if (signal.reciever == this)
         {
             _currentStats.currentHealth -= signal.sender.CurrentStats.damage;
+            _attackDelay = 0;
+            Debug.Log(signal.reciever + " hitted!");
         }
     }
 
@@ -40,6 +44,12 @@ public abstract class Character : MonoBehaviour
     {
         while (character.CurrentStats.currentHealth > 0)
         {
+            while (_attackDelay < 2f)
+            {
+                _attackDelay += Time.deltaTime;
+                yield return null;
+            }
+
             DamageSignal signal = new DamageSignal { reciever = character, sender = this };
             DoDamage(signal);
             yield return new WaitForSeconds(_currentStats.attackSpeed);

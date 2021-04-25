@@ -152,4 +152,4 @@ MonoBehaviour:
   _characterBaseStats: {fileID: 11400000, guid: ed4dd5f8c0713b44c9ca8bb5db4ee37e, type: 2}
   _playerSpeed: 5
   _criticalHealth: 15
-  _timeToBlock: 0.5
+  _timeToBlock: 1.5

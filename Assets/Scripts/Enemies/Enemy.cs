@@ -20,6 +20,7 @@ public class Enemy : Character
     private EnemyStorage _storage;
     private Player _player;
     private Item _lootDrop;
+    private float _timeToNewAttack;
 
     [Inject]
     private void Constuct(EnemyStorage storage,
@@ -45,6 +46,7 @@ public class Enemy : Character
     void Start()
     {
         _storage.enemies.Add(this);
+        _timeToNewAttack = _currentStats.attackSpeed;
     }
 
     private void OnFightBegin(FightBeginSignal signal)
@@ -54,6 +56,7 @@ public class Enemy : Character
         _player = signal.sender;
         if (_player == null) return;
 
+        _attackDelay = 1f;
         StartCoroutine(DoDamageCoroutine(_player));
     }
 
@@ -73,6 +76,7 @@ public class Enemy : Character
     public override void TakeDamage(DamageSignal signal)
     {
         base.TakeDamage(signal);
+
         _signalBus.Fire(new UpdateEnemyHealthSignal { enemy = this });
         OnEnemyDeath();
     }

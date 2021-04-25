@@ -24,6 +24,7 @@ public class MainGameInstaller : MonoInstaller
         Container.DeclareSignal<HealingSignal>();
         Container.DeclareSignal<UseHealthPotionSignal>();
         Container.DeclareSignal<UpdateEnemyHealthSignal>();
+        Container.DeclareSignal<UpdateCooldownSignal>();
 
         Container.BindInstance(_settings);
         Container.BindInterfacesAndSelfTo<GameController>().AsSingle();

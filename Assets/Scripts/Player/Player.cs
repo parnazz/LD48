@@ -15,9 +15,11 @@ public class Player : Character
     private float _criticalHealth = 15f;
 
     [SerializeField]
-    private float _timeToBlock = 0.1f;
+    private float _timeToBlock = 1.5f;
 
+    private Enemy _enemyToAttack;
     private float _maxHealth;
+    private float _timeWhenBlocked;
     private bool _canBlock;
 
     public BaseStats BaseStats => _characterBaseStats;
@@ -31,6 +33,7 @@ public class Player : Character
         _signalBus.Subscribe<ItemEquipedSignal>(OnItemEquiped);
         _signalBus.Subscribe<UseHealthPotionSignal>(OnHealing);
         _signalBus.Subscribe<BlockSignal>(Block);
+        _signalBus.Subscribe<PlayerAttackSignal>(Attack);
     }
 
     void Start()
@@ -60,7 +63,9 @@ public class Player : Character
 
     private void Block(BlockSignal signal)
     {
-        StartCoroutine(BlockCoroutine());
+        _canBlock = true;
+        _timeWhenBlocked = Time.time;
+        //StartCoroutine(BlockCoroutine());
     }
 
     private IEnumerator BlockCoroutine()
@@ -76,6 +81,8 @@ public class Player : Character
 
         if (signal.reciever == this)
         {
+            _signalBus.Fire(new AttackBlockedSignal { sender = this, isBlocked = _canBlock });
+
             var damageTaken = _canBlock ?
                 signal.sender.CurrentStats.damage - _currentStats.defense :
                 signal.sender.CurrentStats.damage;
@@ -83,6 +90,8 @@ public class Player : Character
             damageTaken = Mathf.Max(0, damageTaken);
 
             _currentStats.currentHealth -= damageTaken;
+
+            _canBlock = false;
         }
 
         OnStatsChanged();
@@ -134,16 +143,30 @@ public class Player : Character
         OnStatsChanged();
     }
 
+    private void Attack(PlayerAttackSignal signal)
+    {
+        DamageSignal damageSignal = new DamageSignal { reciever = _enemyToAttack, sender = this };
+        DoDamage(damageSignal);
+    }
+
+    private void Update()
+    {
+        if (!_canBlock) return;
+
+        if (Time.time >= _timeWhenBlocked + _timeToBlock)
+        {
+            _canBlock = false;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
             _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.FightState } );
-           
-            var enemy = collision.GetComponent<Enemy>();
-            _signalBus.Fire(new FightBeginSignal { sender = this, reciever = enemy });
 
-            StartCoroutine(DoDamageCoroutine(enemy));
+            _enemyToAttack = collision.GetComponent<Enemy>();
+            _signalBus.Fire(new FightBeginSignal { sender = this, reciever = _enemyToAttack });
         }
     }
 
@@ -154,6 +177,7 @@ public class Player : Character
         _signalBus.Unsubscribe<ItemEquipedSignal>(OnItemEquiped);
         _signalBus.Unsubscribe<UseHealthPotionSignal>(OnHealing);
         _signalBus.Unsubscribe<BlockSignal>(Block);
+        _signalBus.Unsubscribe<PlayerAttackSignal>(Attack);
     }
 
     public class Factory : PlaceholderFactory<Player>

@@ -21,6 +21,8 @@ public class PlayerInstaller : MonoInstaller
         Container.DeclareSignal<MoveSignal>();
         Container.DeclareSignal<PlayerSpawnedSignal>();
         Container.DeclareSignal<BlockSignal>();
+        Container.DeclareSignal<PlayerAttackSignal>();
+        Container.DeclareSignal<AttackBlockedSignal>();
 
         Container.BindInterfacesTo<PlayerInput>().AsSingle();
 
