@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21169e942845ab547bb6deff4731cf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 1, z: 0}
+  _offset: {x: 0, y: 3.5, z: 0}
 --- !u!114 &315263221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21169e942845ab547bb6deff4731cf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 1, z: 0}
+  _offset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &478117547
 MonoBehaviour:
   m_ObjectHideFlags: 0

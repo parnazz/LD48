@@ -48,7 +48,7 @@ public class FloatingUI : MonoBehaviour
 
         _playerColldownAttack.gameObject.SetActive(true);
         _playerColldownAttack.SetLookAt(signal.sender.transform);
-        _cooldownText.text = "0,00";
+        _cooldownText.text = "0,0";
     }
 
     private void UpdateEnemyHealthText(UpdateEnemyHealthSignal signal)
@@ -69,6 +69,6 @@ public class FloatingUI : MonoBehaviour
 
     private void UpdatePlayerCooldownAttack(UpdateCooldownSignal signal)
     {
-        _cooldownText.text = signal.value.ToString("F");
+        _cooldownText.text = signal.value.ToString("F1");
     }
 }
