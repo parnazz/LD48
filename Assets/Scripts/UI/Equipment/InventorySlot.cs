@@ -11,6 +11,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler
 
     public Image slotImage;
 
+    public Sprite nullSprite;
+
     private GameController _gameController;
     private SignalBus _signalBus;
 
@@ -35,6 +37,6 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler
             
         _signalBus.Fire(new UseItemSignal { item = item });
         item = null;
-        slotImage.sprite = null;
+        slotImage.sprite = nullSprite;
     }
 }

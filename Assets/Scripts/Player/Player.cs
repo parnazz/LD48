@@ -207,4 +207,9 @@ public class Player : Character
             return player;
         }
     }
+
+   /* public static float GetCurrentHealth()
+    {
+        return _currentStats.currentHealth;
+    } */
 }

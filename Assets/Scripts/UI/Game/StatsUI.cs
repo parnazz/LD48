@@ -30,9 +30,9 @@ public class StatsUI : MonoBehaviour
 
     private void SetStatsText(PlayerStatsChangedSignal signal)
     {
-        _currentHP.text = "HP: " + signal.stats.currentHealth.ToString();
-        _currentDamage.text = "Damage: " + signal.stats.damage.ToString();
-        _currentDefense.text = "Defense: " + signal.stats.defense.ToString();
+        _currentHP.text = signal.stats.currentHealth.ToString();
+        _currentDamage.text = signal.stats.damage.ToString();
+        _currentDefense.text = signal.stats.defense.ToString();
     }
 
     private void OnDisable()
