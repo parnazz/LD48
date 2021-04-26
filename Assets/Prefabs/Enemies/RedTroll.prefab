@@ -106,6 +106,7 @@ MonoBehaviour:
     attackSpeed: 2
   _idleSprite: {fileID: 21300000, guid: f603f6fb1c7a2e543afa124919ee2e08, type: 3}
   _attackSprite: {fileID: 21300000, guid: d4645e703b4e30247b0fce7c78a3e49d, type: 3}
+  _attackSound: {fileID: 8300000, guid: 914f9b57c69575f4fb57a49d8ba95ce0, type: 3}
   _timeToNotify: 0.5
   _canDropHealing: 0
   _spriteNotifier: {fileID: 7748896758976781694}

@@ -963,7 +963,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.8, y: -56}
+  m_AnchoredPosition: {x: 187.79999, y: -56}
   m_SizeDelta: {x: 80.67, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &439350827
@@ -6172,7 +6172,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
@@ -6285,7 +6285,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6379,11 +6379,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47f6ad9bbbae6f4faae06aa3145598d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ambientSounds: []
-  _environmentSounds: []
+  _ambientSounds:
+  - {fileID: 8300000, guid: 2f43a45397edee843b6da87ffe177f6a, type: 3}
+  - {fileID: 8300000, guid: b8e1f00a04f9c1345b3c934bf5fa8dac, type: 3}
+  - {fileID: 8300000, guid: b14c3eafbdcebde4bb64844d333aad7a, type: 3}
+  - {fileID: 8300000, guid: 956a4e5ef1dad36488f6a17653ed9cde, type: 3}
+  _environmentSounds:
+  - {fileID: 8300000, guid: f434595e9a5e8e646b7beadad4a52c9f, type: 3}
+  - {fileID: 8300000, guid: 95d330d2f4bd28c42bf2c17ee67dd3ed, type: 3}
   _ambientSource: {fileID: 1510589900}
   _environmentSource: {fileID: 1510589898}
   _combatSource: {fileID: 1510589902}
+  _minMaxTimeBetweenSounds: {x: 10, y: 20}
 --- !u!82 &1510589902
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6395,8 +6402,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
