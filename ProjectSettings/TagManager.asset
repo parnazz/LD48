@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - NPC
+  - NPC_1
+  - NPC_2
+  - NPC_3
+  - FinalTrigger
   layers:
   - Default
   - TransparentFX

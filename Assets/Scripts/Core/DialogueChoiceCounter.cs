@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class DialogueChoiceCounter : MonoBehaviour
 {
-    public List<int> choices;
+    public static DialogChoises choices;
 
     private void Start()
     {
-        choices = new List<int> { 0, 0, 0 };
+        choices = new DialogChoises();
     }
 
-    public void IncreaseBadChoices()
+    public void IncreaseNegativeChoices()
     {
-        choices[0]++;
+        choices.negative++;
     }
 
     public void IncreaseNeutralChoices()
     {
-        choices[1]++;
+        choices.neutral++;
     }
 
-    public void IncreaseGoodChoices()
+    public void IncreasePositiveChoices()
     {
-        choices[2]++;
+        choices.positive++;
     }
 }

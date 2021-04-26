@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class Player : Character
@@ -182,9 +183,31 @@ public class Player : Character
             _signalBus.Fire(new FightBeginSignal { sender = this, reciever = _enemyToAttack });
         }
 
-        if (collision.CompareTag("NPC"))
+        if (collision.CompareTag("NPC_1"))
         {
-            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.DialogState });
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.DialogState, npcId = 1 });
+        }
+        if (collision.CompareTag("NPC_2"))
+        {
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.DialogState, npcId = 2 });
+        }
+        if (collision.CompareTag("NPC_3"))
+        {
+            _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.DialogState, npcId = 3 });
+        }
+        if (collision.CompareTag("FinalTrigger"))
+        {
+            if (DialogueChoiceCounter.choices.negative >= 2)
+            {
+                DialogCounterDataHolder.Type = "negative";
+            } else if(DialogueChoiceCounter.choices.positive >= 2)
+            {
+                DialogCounterDataHolder.Type = "positive";
+            } else
+            {
+                DialogCounterDataHolder.Type = "neutral";
+            }
+            SceneManager.LoadScene("Ending");
         }
     }
 

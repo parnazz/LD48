@@ -103,7 +103,10 @@ public class Enemy : Character
         _signalBus.Unsubscribe<FightBeginSignal>(OnFightBegin);
 
         _storage.enemies.Remove(this);
-
+        if (_storage.enemies.Count == 0)
+        {
+            _signalBus.Fire(new ChangeBackgroundSignal{});
+        }
         if (_canDropHealing)
         {
             _signalBus.Fire(new LootDropSignal { item = _lootTable.healthPotion });
