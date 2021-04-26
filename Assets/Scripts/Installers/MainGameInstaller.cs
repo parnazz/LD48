@@ -26,6 +26,8 @@ public class MainGameInstaller : MonoInstaller
         Container.DeclareSignal<UpdateEnemyHealthSignal>();
         Container.DeclareSignal<UpdateCooldownSignal>();
         Container.DeclareSignal<ChangePlayerLookSignal>();
+        Container.DeclareSignal<ChangeBackgroundSignal>();
+        Container.DeclareSignal<SFXSignal>();
 
         Container.BindInstance(_settings);
         Container.BindInterfacesAndSelfTo<GameController>().AsSingle();

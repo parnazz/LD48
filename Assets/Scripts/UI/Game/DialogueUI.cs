@@ -39,7 +39,8 @@ public class DialogueUI : MonoBehaviour
         _choiceCounter.IncreaseBadChoices();
         _dialogueGO.SetActive(false);
         _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
-        _signalBus.Fire(new ChangePlayerLookSignal { index = _choiceCounter.choices[0] });
+        //_signalBus.Fire(new ChangePlayerLookSignal { index = _choiceCounter.choices[0] });
+        _signalBus.Fire(new ChangeBackgroundSignal { });
     }
 
     private void PickNeutralChoice()
@@ -47,6 +48,7 @@ public class DialogueUI : MonoBehaviour
         _choiceCounter.IncreaseNeutralChoices();
         _dialogueGO.SetActive(false);
         _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
+        _signalBus.Fire(new ChangeBackgroundSignal { });
     }
 
     private void PickGoodChoice()
@@ -54,6 +56,7 @@ public class DialogueUI : MonoBehaviour
         _choiceCounter.IncreaseGoodChoices();
         _dialogueGO.SetActive(false);
         _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
+        _signalBus.Fire(new ChangeBackgroundSignal { });
     }
 
     private void OnGameStateChange(GameStateChangedSignal signal)
