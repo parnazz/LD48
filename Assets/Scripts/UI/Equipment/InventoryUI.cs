@@ -11,6 +11,9 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private Transform _equipmentSlotsTransform;
 
+    [SerializeField]
+    private Sprite nullSprite;
+
     private List<InventorySlot> _inventorySlots;
     private List<EquipmentSlot> _equipmentSlots;
     private SignalBus _signalBus;
@@ -94,7 +97,7 @@ public class InventoryUI : MonoBehaviour
     {
         _signalBus.Fire(new UseHealthPotionSignal { item = (HealthPotion)slot.item });
         slot.item = null;
-        slot.slotImage.sprite = null;
+        slot.slotImage.sprite = nullSprite;
     }
 
     private void OnDisable()

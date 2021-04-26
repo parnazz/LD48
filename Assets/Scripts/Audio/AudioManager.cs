@@ -49,8 +49,11 @@ public class AudioManager : MonoBehaviour
     private void OnChangeAmbient(ChangeBackgroundSignal signal)
     {
         _currentAmbientIndex++;
-        _ambientSource.clip = _ambientSounds[_currentAmbientIndex];
-        _ambientSource.Play();
+        if (_currentAmbientIndex < _ambientSounds.Count)
+        {
+            _ambientSource.clip = _ambientSounds[_currentAmbientIndex];
+            _ambientSource.Play();
+        }
     }
 
     private void OnCombatSound(SFXSignal signal)

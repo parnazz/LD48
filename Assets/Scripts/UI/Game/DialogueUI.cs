@@ -13,6 +13,9 @@ public class DialogueUI : MonoBehaviour
     [SerializeField]
     private GameObject _choicesContainer;
 
+    [SerializeField]
+    private LootTable _lootTable;
+
     private List<Button> _choiceButtons;
 
     private SignalBus _signalBus;
@@ -42,7 +45,11 @@ public class DialogueUI : MonoBehaviour
         _choiceCounter.IncreaseNegativeChoices();
         _dialogueGO.SetActive(false);
         _signalBus.Fire(new GameStateChangedSignal { gameState = GameState.ExploreState });
-        //_signalBus.Fire(new ChangePlayerLookSignal { index = _choiceCounter.choices[0] });
+
+        var index = Random.Range(0, 3);
+        var lootDrop = _lootTable.lootTable[3].equipment[index];
+        _signalBus.Fire(new LootDropSignal { item = lootDrop });
+
         _signalBus.Fire(new ChangeBackgroundSignal { });
     }
 

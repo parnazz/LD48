@@ -55,7 +55,9 @@ public class BackgroundChanger : MonoBehaviour
 
         _backrounds[_currentBGIndex].SetActive(false);
         _currentBGIndex++;
-        _backrounds[_currentBGIndex].SetActive(true);
+
+        if (_currentBGIndex < _backrounds.Count)
+            _backrounds[_currentBGIndex].SetActive(true);
 
         for (float i = _timeToFadeOut; i >= 0; i -= Time.deltaTime)
         {
