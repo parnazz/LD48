@@ -15,6 +15,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected Sprite _attackSprite;
 
+    [SerializeField]
+    protected AudioClip _attackSound;
+
     protected Rigidbody2D _rb;
     protected SignalBus _signalBus;
     protected SpriteRenderer _spriteRenderer;
@@ -33,6 +36,7 @@ public abstract class Character : MonoBehaviour
     {
         StartCoroutine(ChangeSpriteCoroutine(_attackSprite));
         _signalBus.Fire(signal);
+        _signalBus.Fire(new SFXSignal { clip = _attackSound });
     }
 
     protected IEnumerator ChangeSpriteCoroutine(Sprite sprite, float duration = 0.5f)
