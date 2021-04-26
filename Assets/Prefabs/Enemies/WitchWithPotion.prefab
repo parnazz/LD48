@@ -104,6 +104,8 @@ MonoBehaviour:
     defense: 0
     damage: 40
     attackSpeed: 2
+  _idleSprite: {fileID: 21300000, guid: 0c2d4d39404ade04c82e47308c19e5e6, type: 3}
+  _attackSprite: {fileID: 21300000, guid: ff9a24408aa34fc4391246e5b903f6fe, type: 3}
   _timeToNotify: 0.5
   _canDropHealing: 1
   _spriteNotifier: {fileID: 7748896758976781694}
@@ -232,7 +234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -9095717837082945937, guid: 34587324d412940a79d530020c957dc0, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0

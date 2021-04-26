@@ -6,6 +6,9 @@ using Zenject;
 public class Player : Character
 {
     [SerializeField]
+    private Sprite _blockSprite;
+
+    [SerializeField]
     private BaseStats _characterBaseStats;
 
     [SerializeField]
@@ -24,8 +27,6 @@ public class Player : Character
     private float _maxHealth;
     private float _timeWhenBlocked;
     private bool _canBlock;
-
-    private SpriteRenderer _spriteRenderer;
 
     public BaseStats BaseStats => _characterBaseStats;
 
@@ -75,6 +76,7 @@ public class Player : Character
 
     private void Block(BlockSignal signal)
     {
+        StartCoroutine(ChangeSpriteCoroutine(_blockSprite, _timeToBlock));
         _canBlock = true;
         _timeWhenBlocked = Time.time;
     }

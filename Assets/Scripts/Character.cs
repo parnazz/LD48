@@ -9,9 +9,15 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected CharacterStats _currentStats;
 
-    protected Rigidbody2D _rb;
+    [SerializeField]
+    protected Sprite _idleSprite;
 
+    [SerializeField]
+    protected Sprite _attackSprite;
+
+    protected Rigidbody2D _rb;
     protected SignalBus _signalBus;
+    protected SpriteRenderer _spriteRenderer;
 
     protected float _attackDelay = 2f;
 
@@ -25,7 +31,15 @@ public abstract class Character : MonoBehaviour
 
     public virtual void DoDamage(DamageSignal signal)
     {
+        StartCoroutine(ChangeSpriteCoroutine(_attackSprite));
         _signalBus.Fire(signal);
+    }
+
+    protected IEnumerator ChangeSpriteCoroutine(Sprite sprite, float duration = 0.5f)
+    {
+        _spriteRenderer.sprite = sprite;
+        yield return new WaitForSeconds(duration);
+        _spriteRenderer.sprite = _idleSprite;
     }
 
     public virtual void TakeDamage(DamageSignal signal)

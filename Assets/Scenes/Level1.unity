@@ -7071,9 +7071,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2665498741131926646, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2665498741153747747, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498741333606598, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: _offset
+      value: 0.03333
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498741333606598, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: _parallaxEffect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498741645877029, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: _offset
+      value: 4.02162
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498741645877029, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: _parallaxEffect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498741699993175, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: _parallaxEffect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498741877919691, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: _parallaxEffect
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665498741920641821, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
       propertyPath: m_SortingOrder
@@ -7082,6 +7110,10 @@ PrefabInstance:
     - target: {fileID: 2665498741920641822, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
       propertyPath: m_LocalPosition.y
       value: -5.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665498742689354313, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.22
       objectReference: {fileID: 0}
     - target: {fileID: 2665498742995286390, guid: 6b91c35278d4bf34b9321aeff5fa3614, type: 3}
       propertyPath: m_RootOrder

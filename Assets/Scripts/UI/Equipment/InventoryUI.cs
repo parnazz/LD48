@@ -50,7 +50,7 @@ public class InventoryUI : MonoBehaviour
     {
         foreach (var slot in _inventorySlots)
         {
-            if (slot.slotImage.sprite == null)
+            if (slot.item == null)
             {
                 slot.item = signal.item;
                 slot.slotImage.sprite = signal.item.icon;

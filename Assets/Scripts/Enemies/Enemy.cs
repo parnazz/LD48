@@ -35,6 +35,8 @@ public class Enemy : Character
 
     private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         _signalBus.Subscribe<DamageSignal>(TakeDamage);
         _signalBus.Subscribe<FightBeginSignal>(OnFightBegin);
         SetRandomLootDrop();
