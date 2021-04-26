@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     private List<AudioClip> _ambientSounds;
 
     [SerializeField]
-    private List<AudioClip> _environmentSounds;
+    private AudioClip[] _environmentSounds;
 
     [SerializeField]
     private AudioSource _ambientSource;
@@ -20,8 +20,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource _combatSource;
 
+    [SerializeField]
+    private Vector2 _minMaxTimeBetweenSounds;
+
     private SignalBus _signalBus;
-    
+
+    private int _currentAmbientIndex;
 
     [Inject]
     private void Construct(SignalBus signalBus)
@@ -32,6 +36,21 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         _signalBus.Subscribe<SFXSignal>(OnCombatSound);
+        _signalBus.Subscribe<ChangeBackgroundSignal>(OnChangeAmbient);
+
+        _currentAmbientIndex = 0;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(PlayRandomEnvironmentSound());
+    }
+
+    private void OnChangeAmbient(ChangeBackgroundSignal signal)
+    {
+        _currentAmbientIndex++;
+        _ambientSource.clip = _ambientSounds[_currentAmbientIndex];
+        _ambientSource.Play();
     }
 
     private void OnCombatSound(SFXSignal signal)
@@ -39,5 +58,16 @@ public class AudioManager : MonoBehaviour
         if (signal.clip == null) return;
         
         _combatSource.PlayOneShot(signal.clip);
+    }
+
+    private IEnumerator PlayRandomEnvironmentSound()
+    {
+        while (true)
+        {
+            int index = Random.Range(0, _environmentSounds.Length);
+            float time = Random.Range(_minMaxTimeBetweenSounds.x, _minMaxTimeBetweenSounds.y);
+            yield return new WaitForSeconds(time);
+            _environmentSource.PlayOneShot(_environmentSounds[index]);
+        }
     }
 }

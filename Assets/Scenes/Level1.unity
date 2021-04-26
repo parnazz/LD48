@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21169e942845ab547bb6deff4731cf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 1, z: 0}
+  _offset: {x: 0, y: 3.5, z: 0}
 --- !u!114 &315263221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21169e942845ab547bb6deff4731cf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: 1, z: 0}
+  _offset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &478117547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6287,7 +6287,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
@@ -6400,7 +6400,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6494,11 +6494,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47f6ad9bbbae6f4faae06aa3145598d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ambientSounds: []
-  _environmentSounds: []
+  _ambientSounds:
+  - {fileID: 8300000, guid: 2f43a45397edee843b6da87ffe177f6a, type: 3}
+  - {fileID: 8300000, guid: b8e1f00a04f9c1345b3c934bf5fa8dac, type: 3}
+  - {fileID: 8300000, guid: b14c3eafbdcebde4bb64844d333aad7a, type: 3}
+  - {fileID: 8300000, guid: 956a4e5ef1dad36488f6a17653ed9cde, type: 3}
+  _environmentSounds:
+  - {fileID: 8300000, guid: f434595e9a5e8e646b7beadad4a52c9f, type: 3}
+  - {fileID: 8300000, guid: 95d330d2f4bd28c42bf2c17ee67dd3ed, type: 3}
   _ambientSource: {fileID: 1510589900}
   _environmentSource: {fileID: 1510589898}
   _combatSource: {fileID: 1510589902}
+  _minMaxTimeBetweenSounds: {x: 10, y: 20}
 --- !u!82 &1510589902
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6510,8 +6517,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

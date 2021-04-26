@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06907c898d740d94ea862bf4e8f565e4, type: 3}
   m_Name: ArmorLv4
   m_EditorClassIdentifier: 
-  icon: {fileID: -2659340736525041608, guid: 24d0c5b6b13f06e47a97a1b8e419a3af, type: 3}
+  icon: {fileID: 21300000, guid: 1ba4d1cb3fbed754f98e9df197439d32, type: 3}
   itemTag: Armor
   damage: 0
   health: 220
