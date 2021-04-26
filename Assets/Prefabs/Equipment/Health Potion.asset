@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c279f4c3e502e4ca5b02505da8e8f4, type: 3}
   m_Name: Health Potion
   m_EditorClassIdentifier: 
-  icon: {fileID: 6335270562383830132, guid: 24d0c5b6b13f06e47a97a1b8e419a3af, type: 3}
+  icon: {fileID: 21300000, guid: 7eef0bf1109431544a0a3560c45e6150, type: 3}
   itemTag: Consumable
   amountOfHealing: 100

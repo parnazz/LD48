@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06907c898d740d94ea862bf4e8f565e4, type: 3}
   m_Name: ShieldLv1
   m_EditorClassIdentifier: 
-  icon: {fileID: -2110027701011275211, guid: 24d0c5b6b13f06e47a97a1b8e419a3af, type: 3}
+  icon: {fileID: 21300000, guid: 14726fa14e8ed07408c657afa651e20f, type: 3}
   itemTag: Shield
   damage: 0
   health: 0

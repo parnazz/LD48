@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06907c898d740d94ea862bf4e8f565e4, type: 3}
   m_Name: SwordLv3
   m_EditorClassIdentifier: 
-  icon: {fileID: -3702229310380340002, guid: 7b4e62fcbddf67c4f92ca910f8d4310a, type: 3}
+  icon: {fileID: 21300000, guid: 03bef2abd09e1dd4c94da29d0a670704, type: 3}
   itemTag: Weapon
   damage: 37
   health: 0
